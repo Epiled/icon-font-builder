@@ -1,4 +1,4 @@
-import { defaultConfig } from "./config/default-config.js";
+import { createConfig } from "./config/create-config.js";
 
 import { scanIcons } from "./core/scan-icons.js";
 import { normalizeIcons } from "./core/normalize-naming.js";
@@ -10,10 +10,7 @@ import { generateCss } from "./core/generate-css.js";
 import { generatePreview } from "./core/generate-preview.js";
 
 export async function buildIcons(userConfig = {}) {
-  const config = {
-    ...defaultConfig,
-    ...userConfig,
-  };
+  const config = createConfig(userConfig);
 
   const icons = scanIcons(config.inputDir);
 
@@ -32,4 +29,6 @@ export async function buildIcons(userConfig = {}) {
   }
 
   await generatePreview(glyphs, config);
+
+  return glyphs;
 }
