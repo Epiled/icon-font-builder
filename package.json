@@ -1,0 +1,41 @@
+{
+  "name": "@epiled/icon-font-builder",
+  "version": "1.0.0",
+  "description": "Generate icon fonts from SVG files",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "icon-font-builder": "bin/cli.js"
+  },
+  "keywords": [
+    "icons",
+    "icon-font",
+    "svg",
+    "font",
+    "webfont"
+  ],
+  "author": "Felipe De Andrade (https://github.com/epiled)",
+  "license": "MIT",
+  "homepage": "https://github.com/epiled/icon-font-builder",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/epiled/icon-font-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/epiled/icon-font-builder/issues"
+  },
+  "engines": {
+    "node": ">=20.12.2"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.8",
+    "svg2ttf": "^6.0.3",
+    "svgicons2svgfont": "^15.0.1",
+    "ttf2woff": "^3.0.0",
+    "ttf2woff2": "^8.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
