@@ -1,15 +1,20 @@
 // Default configuration
 
+const fontName = "Epiled";
+
 const defaultConfig = {
   inputDir: "src/assets/svg/icons-ui",
-  outputDir: "dist/assets/fonts/Epiled",
+  outputDir: `dist/assets/fonts/${fontName}`,
   font: {
-    fontName: "Epiled",
-    folderName: "Epiled",
-    fontFileName: "epiled",
+    fontName: fontName,
+    folderName: fontName,
+    fontFileName: fontName,
     fontPath: "../assets/fonts",
   },
-  cssClass: "icon-",
+  css: {
+    cssClass: "icon-",
+    cssFileName: fontName.toLowerCase(),
+  },
 };
 
 export { defaultConfig };
