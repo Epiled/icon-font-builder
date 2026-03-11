@@ -24,7 +24,9 @@ handlebars.registerPartial(
 );
 
 function generateCss(glyphs = [], config) {
-  console.log("Config", glyphs);
+  const { font, cssClass } = config;
+  const { fontName, folderName, fontFileName, fontPath } = font;
+
   if (!fs.existsSync(iconsTemplatePath)) {
     throw new Error(`Template CSS not found: ${iconsTemplatePath}`);
   }
@@ -35,18 +37,21 @@ function generateCss(glyphs = [], config) {
     );
   }
 
+  const outputPath = path.join("dist/css", `${fontFileName}.css`);
+
+  fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+
   const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
   const cssCompiled = handlebars.compile(cssRaw);
 
   const cssParse = cssCompiled({
-    fontName: config.fontName,
-    folderName: config.folderName,
-    fontPath: config.fontPath,
-    cssClass: config.cssClass,
+    fontName,
+    folderName,
+    fontFileName,
+    fontPath,
+    cssClass,
     glyphs,
   });
-
-  const outputPath = path.join("dist", `${config.folderName}.css`);
 
   fs.writeFileSync(outputPath, cssParse);
 }

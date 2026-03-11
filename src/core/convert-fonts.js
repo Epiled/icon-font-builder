@@ -7,13 +7,14 @@ import svg2ttf from "svg2ttf";
 import ttf2woff from "ttf2woff";
 import ttf2woff2 from "ttf2woff2";
 
-async function convertFonts(options) {
-  const { fontName, dist } = options;
+async function convertFonts(config) {
+  const { font, outputDir } = config;
+  const { fontName } = font;
 
-  const svgPath = path.join(dist, `${fontName}.svg`);
-  const ttfPath = path.join(dist, `${fontName}.ttf`);
-  const woffPath = path.join(dist, `${fontName}.woff`);
-  const woff2Path = path.join(dist, `${fontName}.woff2`);
+  const svgPath = path.join(outputDir, `${fontName}.svg`);
+  const ttfPath = path.join(outputDir, `${fontName}.ttf`);
+  const woffPath = path.join(outputDir, `${fontName}.woff`);
+  const woff2Path = path.join(outputDir, `${fontName}.woff2`);
 
   const svg = fs.readFileSync(svgPath, "utf8");
 
