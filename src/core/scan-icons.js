@@ -10,6 +10,10 @@ function scanIcons(dir) {
 
   const files = fs.readdirSync(dir);
 
+  if (files.length <= 0) {
+    throw new Error(`Not found files inside directory: ${dir}`);
+  }
+
   const icons = files
     .filter((file) => file.endsWith(".svg"))
     .sort()

@@ -8,7 +8,10 @@ import handlebars from "handlebars";
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const iconsTemplatePath = path.resolve(__dirname, "../templates/icons.css.hbs");
+const iconsTemplatePath = path.resolve(
+  __dirname,
+  "../templates/icons.scss.hbs",
+);
 
 const baseIconTemplatePath = path.resolve(
   __dirname,
@@ -23,29 +26,29 @@ handlebars.registerPartial(
   fs.readFileSync(baseIconTemplatePath, "utf8"),
 );
 
-function generateCss(glyphs = [], config) {
+function generateSass(glyphs = [], config) {
   const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
   const { cssClass } = css;
 
   if (!fs.existsSync(iconsTemplatePath)) {
-    throw new Error(`Template CSS not found: ${iconsTemplatePath}`);
+    throw new Error(`Template SASS not found: ${iconsTemplatePath}`);
   }
 
   if (!Array.isArray(glyphs)) {
     throw new Error(
-      "⚠️ generateCss called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild.",
+      "⚠️ generateSass called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild.",
     );
   }
 
-  const outputPath = path.join("dist/css", `${fontFileName}.css`);
+  const outputPath = path.join("dist/sass", `_${fontFileName}.scss`);
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
-  const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
-  const cssCompiled = handlebars.compile(cssRaw);
+  const sassRaw = fs.readFileSync(iconsTemplatePath, "utf8");
+  const sassCompiled = handlebars.compile(sassRaw);
 
-  const cssParse = cssCompiled({
+  const sassParse = sassCompiled({
     fontName,
     folderName,
     fontFileName,
@@ -54,7 +57,7 @@ function generateCss(glyphs = [], config) {
     glyphs,
   });
 
-  fs.writeFileSync(outputPath, cssParse);
+  fs.writeFileSync(outputPath, sassParse);
 }
 
-export { generateCss };
+export { generateSass };

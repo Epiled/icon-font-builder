@@ -26,6 +26,6 @@
 {{#each glyphs}}
 .{{../cssClass}}{{name}}::before {
   @extend %{{../cssClass}};
-  content: "\\{{code}}";
+  content: "\\{{unicodeHex}}";
 }
 {{/each}}

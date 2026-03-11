@@ -3,17 +3,18 @@
   This template defines the font-family and source paths.
  
   Variables:
-   - fontName    → Font family name
-   - fontPath    → Base path for font assets
-   - folderName  → Font output directory
+   - fontName       → Font family name
+   - fontPath       → Base path for font assets
+   - folderName     → Font output directory
+   - fontFileName   → Font file Name
 --}}
 
 @font-face {
   font-family: '{{fontName}}';
   src: 
-    url('{{fontPath}}/{{folderName}}/{{fontName}}.woff2') format('woff2'),
-    url('{{fontPath}}/{{folderName}}/{{fontName}}.woff') format('woff'),
-    url('{{fontPath}}/{{folderName}}/{{fontName}}.ttf') format('truetype');
+    url('{{fontPath}}/{{folderName}}/{{fontFileName}}.woff2') format('woff2'),
+    url('{{fontPath}}/{{folderName}}/{{fontFileName}}.woff') format('woff'),
+    url('{{fontPath}}/{{folderName}}/{{fontFileName}}.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;

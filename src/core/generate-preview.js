@@ -14,6 +14,10 @@ const previewTemplatePath = path.resolve(
 );
 
 function generatePreview(glyphs = [], config) {
+  const { font, css } = config;
+  const { fontName } = font;
+  const { cssClass, cssFileName } = css;
+
   if (!fs.existsSync(previewTemplatePath)) {
     throw new Error(`Template preview not found: ${previewTemplatePath}`);
   }
@@ -28,8 +32,9 @@ function generatePreview(glyphs = [], config) {
   const previewComplied = handlebars.compile(previewRaw);
 
   const previewParse = previewComplied({
-    fontName: config.fontName,
-    cssClass: config.cssClass,
+    fontName,
+    cssClass,
+    cssFileName,
     glyphs,
   });
 

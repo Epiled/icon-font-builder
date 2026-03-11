@@ -3,12 +3,15 @@
 import fs from "fs";
 import path from "path";
 
-async function buildSvgFont(icons, options) {
+async function buildSvgFont(icons, config) {
   const { SVGIcons2SVGFontStream } = await import("svgicons2svgfont");
 
-  const { fontName, dist } = options;
+  const { font, outputDir } = config;
+  const { fontName } = font;
 
-  const fontPath = path.join(dist, `${fontName}.svg`);
+  const fontPath = path.join(outputDir, `${fontName}.svg`);
+
+  fs.mkdirSync(outputDir, { recursive: true });
 
   return new Promise((resolve, reject) => {
     const fontStream = new SVGIcons2SVGFontStream({
