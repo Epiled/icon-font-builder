@@ -4,18 +4,18 @@
   This template renders a preview page for all generated icons.
 
   Variables:
-   - fontName → Font family name
-   - fontFileName → Font file name
-   - glyphs   → Array of icon glyphs with 'name' property
-   - name     → Icon CSS class name (applied without prefix)
-   - cssClass → Prefix icon CSS class name
+   - fontName     → Font family name
+   - glyphs       → Array of icon glyphs with 'name' property
+   - name         → Icon CSS class name (applied without prefix)
+   - cssClass     → Prefix icon CSS class name
+   - cssFileName  → CSS file name
  --}}
 
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <title>Preview — {{fontName}}</title>
-    <link rel="stylesheet" href="./css/{{fontFileName}}.css" />
+    <link rel="stylesheet" href="./css/{{cssFileName}}.css" />
     <style>
       body {
         font-family: sans-serif;

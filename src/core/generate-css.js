@@ -24,8 +24,9 @@ handlebars.registerPartial(
 );
 
 function generateCss(glyphs = [], config) {
-  const { font, cssClass } = config;
+  const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
+  const { cssClass } = css;
 
   if (!fs.existsSync(iconsTemplatePath)) {
     throw new Error(`Template CSS not found: ${iconsTemplatePath}`);

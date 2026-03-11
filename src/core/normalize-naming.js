@@ -1,7 +1,7 @@
 // Step: Normalize
 
 function normalizeIcons(icons = [], config) {
-  const prefix = config.cssClass || "";
+  const prefix = config.css.cssClass || "";
 
   return icons.map((icon) => ({
     ...icon,

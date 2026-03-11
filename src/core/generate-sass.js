@@ -27,8 +27,9 @@ handlebars.registerPartial(
 );
 
 function generateSass(glyphs = [], config) {
-  const { font, cssClass } = config;
+  const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
+  const { cssClass } = css;
 
   if (!fs.existsSync(iconsTemplatePath)) {
     throw new Error(`Template SASS not found: ${iconsTemplatePath}`);
