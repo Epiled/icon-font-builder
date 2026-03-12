@@ -1,4 +1,4 @@
-// Step: 5
+// Step: 5 - SASS
 
 import fs from "fs";
 import path from "path";
@@ -21,19 +21,22 @@ const baseIconTemplatePath = path.resolve(
 if (!fs.existsSync(baseIconTemplatePath))
   throw new Error(`Base icons template not found: ${baseIconTemplatePath}`);
 
+if (!fs.existsSync(iconsTemplatePath)) {
+  throw new Error(`Template SASS not found: ${iconsTemplatePath}`);
+}
+
 handlebars.registerPartial(
   "base-icons",
   fs.readFileSync(baseIconTemplatePath, "utf8"),
 );
 
+const sassRaw = fs.readFileSync(iconsTemplatePath, "utf8");
+const sassTemplate = handlebars.compile(sassRaw);
+
 function generateSass(glyphs = [], config) {
   const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
-  const { cssClass } = css;
-
-  if (!fs.existsSync(iconsTemplatePath)) {
-    throw new Error(`Template SASS not found: ${iconsTemplatePath}`);
-  }
+  const { cssClass, cssFileName } = css;
 
   if (!Array.isArray(glyphs)) {
     throw new Error(
@@ -41,14 +44,11 @@ function generateSass(glyphs = [], config) {
     );
   }
 
-  const outputPath = path.join("dist/sass", `_${fontFileName}.scss`);
+  const outputPath = path.join("dist/sass", `_${cssFileName}.scss`);
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
-  const sassRaw = fs.readFileSync(iconsTemplatePath, "utf8");
-  const sassCompiled = handlebars.compile(sassRaw);
-
-  const sassParse = sassCompiled({
+  const sassOutput = sassTemplate({
     fontName,
     folderName,
     fontFileName,
@@ -57,7 +57,9 @@ function generateSass(glyphs = [], config) {
     glyphs,
   });
 
-  fs.writeFileSync(outputPath, sassParse);
+  fs.writeFileSync(outputPath, sassOutput);
+
+  return { outputPath, sassOutput };
 }
 
 export { generateSass };
