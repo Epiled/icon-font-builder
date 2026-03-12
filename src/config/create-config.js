@@ -6,9 +6,9 @@ export function createConfig(userConfig = {}) {
   const fontName = userConfig.font?.fontName || iconsName;
 
   const config = {
+    iconsName,
     inputDir: userConfig.inputDir || "src/assets/svg/icons-ui",
     outputDir: userConfig.outputDir || `dist/assets/fonts/${fontName}`,
-    iconsName,
 
     font: {
       fontName: userConfig.font?.folderName || fontName,
