@@ -1,4 +1,4 @@
-// Step: 5
+// Step: 5 - CSS
 
 import fs from "fs";
 import path from "path";
@@ -18,19 +18,22 @@ const baseIconTemplatePath = path.resolve(
 if (!fs.existsSync(baseIconTemplatePath))
   throw new Error(`Base icons template not found: ${baseIconTemplatePath}`);
 
+if (!fs.existsSync(iconsTemplatePath)) {
+  throw new Error(`Template CSS not found: ${iconsTemplatePath}`);
+}
+
 handlebars.registerPartial(
   "base-icons",
   fs.readFileSync(baseIconTemplatePath, "utf8"),
 );
 
+const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
+const cssTemplate = handlebars.compile(cssRaw);
+
 function generateCss(glyphs = [], config) {
   const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
-  const { cssClass } = css;
-
-  if (!fs.existsSync(iconsTemplatePath)) {
-    throw new Error(`Template CSS not found: ${iconsTemplatePath}`);
-  }
+  const { cssClass, cssFileName } = css;
 
   if (!Array.isArray(glyphs)) {
     throw new Error(
@@ -38,14 +41,11 @@ function generateCss(glyphs = [], config) {
     );
   }
 
-  const outputPath = path.join("dist/css", `${fontFileName}.css`);
+  const outputPath = path.join("dist/css", `${cssFileName}.css`);
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
-  const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
-  const cssCompiled = handlebars.compile(cssRaw);
-
-  const cssParse = cssCompiled({
+  const cssOutput = cssTemplate({
     fontName,
     folderName,
     fontFileName,
@@ -54,7 +54,9 @@ function generateCss(glyphs = [], config) {
     glyphs,
   });
 
-  fs.writeFileSync(outputPath, cssParse);
+  fs.writeFileSync(outputPath, cssOutput);
+
+  return { outputPath, cssOutput };
 }
 
 export { generateCss };
