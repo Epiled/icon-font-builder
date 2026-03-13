@@ -1,22 +1,303 @@
-# icon-font-builder
+# Icon Font Builder
 
-Generate icon fonts from SVG files.
+Generate icon fonts from SVG files and automatically create CSS classes for them.
+
+<div style="display: inline-flex; gap: 2px">
+
+![npm](https://img.shields.io/npm/v/@epiled/icon-font-builder)
+
+![downloads](https://img.shields.io/npm/dw/@epiled/icon-font-builder)
+
+![license](https://img.shields.io/npm/l/@epiled/icon-font-builder)
+
+</div>
+
+## Features
+
+- Generate icon fonts from SVG files
+- Automatic CSS class generation
+- CLI and Node API support
+- Customizable output structure
+- Automatic icons preview page
 
 ## Install
 
+```bash
 npm install @epiled/icon-font-builder
+```
 
 ## CLI
 
+```bash
 npx @epiled/icon-font-builder
+```
 
 ## Node API
 
-import { buildIcons } from "icon-font-builder";
+```js
+import { buildIcons } from "@epiled/icon-font-builder";
 
-await buildIcons({
-inputDir: "src/icons",
-outputDir: "dist/fonts",
-cssClass: "icon",
-fontName: "icons"
+await buildIcons();
+```
+
+## Usage
+
+After building the icons, include the generated CSS in your project:
+
+```html
+<link rel="stylesheet" href="css/icons.css" />
+```
+
+Then use the icons with CSS classes:
+
+```html
+<i class="icon-add-user"></i>
+<i class="icon-arrow"></i>
+```
+
+## Examples
+
+### Gulp
+
+Example using Gulp task runner.
+
+#### Minimal configuration
+
+```js
+import gulp from "gulp";
+import { buildIcons } from "@epiled/icon-font-builder";
+
+gulp.task("buildIcons", async function () {
+  await buildIcons();
 });
+```
+
+##### Example Project Structure:
+
+```text
+src/
+├── icons/
+|  ├── icon-add-user.svg
+|  └── icon-arrow.svg
+```
+
+##### Output Tree:
+
+```text
+dist/
+├── css/
+|  └── icons.css
+├── fonts/
+|  └── Icons/
+|     ├── Icons.svg
+|     ├── Icons.ttf
+|     ├── Icons.woff
+|     └── Icons.woff2
+└── icons-preview.html
+```
+
+##### Output CSS:
+
+```css
+@font-face {
+  font-family: "Icons";
+  src:
+    url("../fonts/Icons/Icons.woff2") format("woff2"),
+    url("../fonts/Icons/Icons.woff") format("woff"),
+    url("../fonts/Icons/Icons.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: "Icons" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add-user::before {
+  content: "\e001";
+}
+
+.icon-arrow::before {
+  content: "\e002";
+}
+```
+
+#### Recommended configuration
+
+```js
+import gulp from "gulp";
+import { buildIcons } from "@epiled/icon-font-builder";
+
+gulp.task("buildIcons", async function () {
+  await buildIcons({iconsName: "Epl-Icons"});
+});
+```
+
+##### Output Tree:
+
+```text
+dist/
+├── Epl-Icons/
+│   └── Epl-Icons/
+│       ├── Epl-Icons.svg
+│       ├── Epl-Icons.ttf
+│       ├── Epl-Icons.woff
+│       └── Epl-Icons.woff2
+├── css/
+│   └── epl-icons.css
+└── icons-preview.html
+```
+
+##### Output CSS:
+
+```css
+@font-face {
+  font-family: "Epl-Icons";
+  src:
+    url("../Epl-Icons/Epl-Icons/Epl-Icons.woff2")
+      format("woff2"),
+    url("../Epl-Icons/Epl-Icons/Epl-Icons.woff")
+      format("woff"),
+    url("../Epl-Icons/Epl-Icons/Epl-Icons.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: "Epl-Icons" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-add-user::before {
+  content: "\e001";
+}
+
+.icon-arrow::before {
+  content: "\e002";
+}
+```
+
+#### Full configuration:
+
+```js
+import gulp from "gulp";
+import { buildIcons } from "@epiled/icon-font-builder";
+
+gulp.task("buildIcons", async function () {
+  await buildIcons({
+    iconsName: "Icons-All", // required
+    inputDir: "src/icons",
+    outputDir: `dist/Icons-Output`,
+    font: {
+      fontName: "Icons-Font-Name",
+      folderName: "Icons-Folder-Name",
+      fontFileName: "Icons-Font-File-Name",
+      fontPath: "../Icons-Font-Path",
+    },
+    css: {
+      cssClass: "icon-all",
+      cssFileName: "icons-css-file-name",
+    },
+  });
+});
+```
+
+##### Output Tree:
+
+```text
+dist/
+├── Icons-Output/
+│   └── Icons-Folder-Name/
+│       ├── Icons-Font-File-Name.svg
+│       ├── Icons-Font-File-Name.ttf
+│       ├── Icons-Font-File-Name.woff
+│       └── Icons-Font-File-Name.woff2
+├── css/
+│   └── icons-css-file-name.css
+└── icons-preview.html
+```
+
+##### Output CSS:
+
+```css
+@font-face {
+  font-family: "Icons-All";
+  src:
+    url("../Icons-Font-Path/Icons-Folder-Name/Icons-Font-File-Name.woff2")
+      format("woff2"),
+    url("../Icons-Font-Path/Icons-Folder-Name/Icons-Font-File-Name.woff")
+      format("woff"),
+    url("../Icons-Font-Path/Icons-Folder-Name/Icons-Font-File-Name.ttf")
+      format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^="icon-all-"],
+[class*=" icon-all-"] {
+  font-family: "Icons-All" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-all-add-user::before {
+  content: "\e001";
+}
+
+.icon-all-arrow::before {
+  content: "\e002";
+}
+```
+
+## Options
+
+| Option            | Type   | Default    | Description                 |
+| ----------------- | ------ | ---------- | --------------------------- |
+| iconsName         | string | Icons      | Name of the icon set        |
+| inputDir          | string | src/icons  | Source folder for SVG icons |
+| outputDir         | string | dist/fonts | Output directory            |
+| font.fontName     | string | Icons      | Font name                   |
+| font.folderName   | string | Icons      | Folder name for font files  |
+| font.fontFileName | string | Icons      | Font file base name         |
+| font.fontPath     | string | ../fonts   | Path to font in CSS         |
+| css.cssClass      | string | icon       | CSS class prefix            |
+| css.cssFileName   | string | icons      | Name of generated CSS file  |
+
+## Requirements
+
+- Node.js 24.14.0+
+
+## Author
+
+- [Felipe de Andrade](https://github.com/Epiled)
+
+## License
+
+[MIT](https://github.com/Epiled/icon-font-builder/blob/main/LICENSE)
