@@ -15,7 +15,7 @@ const defaultConfig = {
   },
 
   css: {
-    cssClass: "icon-",
+    cssClass: "icon",
     cssFileName: fontName.toLowerCase(),
   },
 };
