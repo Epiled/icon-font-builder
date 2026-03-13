@@ -25,7 +25,7 @@
     "url": "https://github.com/epiled/icon-font-builder/issues"
   },
   "engines": {
-    "node": ">=20.12.2"
+    "node": ">=24.14.0"
   },
   "files": [
     "bin",
@@ -40,10 +40,15 @@
     "ttf2woff2": "^8.0.1"
   },
   "devDependencies": {
-    "vitest": "^4.0.18"
+    "tree-cli": "^0.6.7",
+    "vitest": "^4.1.0"
   },
   "scripts": {
     "test": "vitest",
-    "prepublishOnly": "npm test"
+    "prepublishOnly": "npm test",
+    "build:icons": "node scripts/build-default.js",
+    "build:icons:dev": "node scripts/build-dev.js",
+    "build:icons:dev:log": "node scripts/build-dev-glyphs.js",
+    "tree-cli": "npx tree-cli -l 5 -a --markdown --ignore node_modules/,build/,.git/,.next/,coverage/,out/,tmp/,temp/ ./ -o structure.md"
   }
 }
