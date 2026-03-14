@@ -29,7 +29,7 @@ describe("generate-css", () => {
     const config = { font: {}, css: {} };
 
     expect(() => generateCss("wrong", config)).toThrow(
-      "⚠️ generateCss called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild.",
+      /⚠️ generateCss called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild./,
     );
   });
 
