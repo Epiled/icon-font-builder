@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { scanIcons } from "../src/core/scan-icons.js";
+import { scanIcons } from "#src/core/scan-icons.js";
 
 import fs from "fs";
 import path from "path";

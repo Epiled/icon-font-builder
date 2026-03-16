@@ -1,9 +1,11 @@
 // Step: 2
 
-function generateUnicodeMap(icons) {
+import { Icon, IconGlyph } from "./types.js";
+
+function saveUnicodeMap(icons: Icon[]): IconGlyph[] {
   const baseCode = 0xe001;
 
-  return icons
+  return [...icons]
     .sort((a, b) => a.name.localeCompare(b.name))
     .map((icon, index) => {
       const code = baseCode + index;
@@ -17,4 +19,4 @@ function generateUnicodeMap(icons) {
     });
 }
 
-export { generateUnicodeMap };
+export { saveUnicodeMap };

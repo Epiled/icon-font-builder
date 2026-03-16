@@ -3,7 +3,10 @@
 import fs from "fs";
 import path from "path";
 
-async function buildSvgFont(icons, config) {
+import { GlyphStream, IconGlyph } from "./types.js";
+import { ResolvedConfig } from "#config/types.js";
+
+async function buildSvgFont(icons: IconGlyph[], config: ResolvedConfig): Promise<void> {
   const { SVGIcons2SVGFontStream } = await import("svgicons2svgfont");
 
   const { font, outputDir } = config;
@@ -27,8 +30,12 @@ async function buildSvgFont(icons, config) {
     writeStream.on("finish", resolve);
     writeStream.on("error", reject);
 
+    if (!Array.isArray(icons) || icons.length === 0) {
+      throw new Error("No icons provided to buildSvgFont");
+    }
+
     icons.forEach((icon) => {
-      const glyph = fs.createReadStream(icon.path);
+      const glyph = fs.createReadStream(icon.path) as GlyphStream;
 
       glyph.metadata = {
         unicode: [icon.unicode],

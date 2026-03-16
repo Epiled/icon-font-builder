@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { createConfig } from "./src/config/create-config.js";
+import { createConfig } from "#src/config/create-config.js";
 
 describe("create-config", () => {
   it("should return a config object", () => {

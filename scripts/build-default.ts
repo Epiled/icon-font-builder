@@ -1,4 +1,4 @@
-import { buildIcons } from "../src/build-icons.js";
+import { buildIcons } from "#src/build-icons.js";
 
 async function run() {
   await buildIcons();

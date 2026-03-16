@@ -1,28 +1,28 @@
-// Step: 5 - SASS
+// Step: 5 - CSS
 
 import fs from "fs";
 import path from "path";
 import url from "url";
 import handlebars from "handlebars";
 
+import { CssResult, IconGlyph } from "../core/types.js";
+import { ResolvedConfig } from "#config/types.js";
+
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const iconsTemplatePath = path.resolve(
-  __dirname,
-  "../templates/icons.scss.hbs",
-);
+const iconsTemplatePath = path.resolve(__dirname, "../../templates/icons.css.hbs");
 
 const baseIconTemplatePath = path.resolve(
   __dirname,
-  "../templates/base-icons.hbs",
+  "../../templates/base-icons.hbs",
 );
 
 if (!fs.existsSync(baseIconTemplatePath))
   throw new Error(`Base icons template not found: ${baseIconTemplatePath}`);
 
 if (!fs.existsSync(iconsTemplatePath)) {
-  throw new Error(`Template SASS not found: ${iconsTemplatePath}`);
+  throw new Error(`Template CSS not found: ${iconsTemplatePath}`);
 }
 
 handlebars.registerPartial(
@@ -30,25 +30,25 @@ handlebars.registerPartial(
   fs.readFileSync(baseIconTemplatePath, "utf8"),
 );
 
-const sassRaw = fs.readFileSync(iconsTemplatePath, "utf8");
-const sassTemplate = handlebars.compile(sassRaw);
+const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
+const cssTemplate = handlebars.compile(cssRaw);
 
-function generateSass(glyphs = [], config) {
+function generateCss(glyphs: IconGlyph[] = [], config: ResolvedConfig): CssResult {
   const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
   const { cssClass, cssFileName } = css;
 
   if (!Array.isArray(glyphs)) {
     throw new Error(
-      "⚠️ generateSass called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild.",
+      "⚠️ generateCss called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild.",
     );
   }
 
-  const outputPath = path.join("dist/sass", `_${cssFileName}.scss`);
+  const outputPath = path.join("dist/css", `${cssFileName}.css`);
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 
-  const sassOutput = sassTemplate({
+  const cssOutput = cssTemplate({
     fontName,
     folderName,
     fontFileName,
@@ -57,9 +57,9 @@ function generateSass(glyphs = [], config) {
     glyphs,
   });
 
-  fs.writeFileSync(outputPath, sassOutput);
+  fs.writeFileSync(outputPath, cssOutput);
 
-  return { outputPath, sassOutput };
+  return { outputPath, cssOutput };
 }
 
-export { generateSass };
+export { generateCss };

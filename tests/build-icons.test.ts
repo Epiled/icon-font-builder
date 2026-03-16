@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { buildIcons } from "./src/build-icons";
+import { buildIcons } from "#src/build-icons.ts";
 
 import path from "path";
 import url from "url";
