@@ -1,16 +1,35 @@
 # Icon Font Builder
 
-Generate icon fonts from SVG files and automatically create CSS classes for them.
+Generate icon fonts from SVG files and automatically create CSS classes.
 
-<div style="display: inline-flex; gap: 2px">
+<p>
+  <a href="https://www.npmjs.com/package/@epiled/icon-font-builder">
+    <img src="https://img.shields.io/npm/v/@epiled/icon-font-builder" alt="npm version">
+  </a>
+  <a href="https://www.npmjs.com/package/@epiled/icon-font-builder">
+    <img src="https://img.shields.io/npm/dw/@epiled/icon-font-builder" alt="downloads">
+  </a>
+  <a href="https://github.com/Epiled/icon-font-builder/actions">
+    <img src="https://img.shields.io/github/actions/workflow/status/Epiled/icon-font-builder/test.yml?label=tests" alt="tests">
+  </a>
+  <img src="https://img.shields.io/npm/l/@epiled/icon-font-builder" alt="license">
+</p>
 
-![npm](https://img.shields.io/npm/v/@epiled/icon-font-builder)
+## Table of Contents
 
-![downloads](https://img.shields.io/npm/dw/@epiled/icon-font-builder)
-
-![license](https://img.shields.io/npm/l/@epiled/icon-font-builder)
-
-</div>
+- [Install](#install)
+- [CLI](#cli)
+- [Node API](#node-api)
+- [Usage](#usage)
+- [Examples](#examples)
+  - [Gulp](#gulp)
+    - [Minimal configuration](#minimal-configuration)
+    - [Recommended configuration](#recommended-configuration)
+    - [Full configuration](#full-configuration)
+- [Options](#options)
+- [Requirements](#requirements)
+- [Author](#author)
+- [License](#license)
 
 ## Features
 
@@ -77,8 +96,8 @@ gulp.task("buildIcons", async function () {
 ```text
 src/
 ├── icons/
-|  ├── icon-add-user.svg
-|  └── icon-arrow.svg
+|  ├── add-user.svg
+|  └── arrow.svg
 ```
 
 ##### Output Tree:
@@ -197,7 +216,7 @@ dist/
 }
 ```
 
-#### Full configuration:
+#### Full configuration
 
 ```js
 import gulp from "gulp";
@@ -218,9 +237,15 @@ gulp.task("buildIcons", async function () {
       cssClass: "icon-all",
       cssFileName: "icons-css-file-name",
     },
+    stripPrefix: "icon-", // removes "icon-" prefix from icon filenames
+    codepointsFile: ".icon-builder-cache", // experimental: custom path not supported yet: file used to store icon → codepoint mapping
   });
 });
 ```
+
+> ⚠️ **Note**
+> `codepointsFile` is currently auto-managed by the builder.  
+> Custom paths are not supported yet and will be ignored.
 
 ##### Output Tree:
 
@@ -291,12 +316,13 @@ dist/
 | css.cssFileName   | string               | icons      | Name of generated CSS/SASS file               |
 | formats           | ("css" \| "sass")[]  | ["css"]    | Output style formats to generate              |
 | stripPrefix       | string \| null       | null       | Remove a prefix from icon names               |
-| codepointsFile    | string               | —          | File path to store persistent icon codepoints |
+| codepointsFile    | string               | —          | File path to store persistent icon codepoints → codepoint mapping (auto-managed) |
 
 
 ## Requirements
 
-- Node.js 24.14.0+
+- Node.js >= 24.14.0
+- npm >= 11.9.0
 
 ## Author
 
