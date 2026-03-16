@@ -1,2 +1,2 @@
-export { buildIcons } from "./src/build-icons";
+export { buildIcons } from "./src/build-icons.js";
 

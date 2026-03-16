@@ -23,6 +23,6 @@
       "#src/*": ["src/*"]
     }
   },
-  "include": ["src", "bin"],
+  "include": ["index.ts", "src", "bin"],
   "exclude": ["node_modules", "dist", "tests"]
 }

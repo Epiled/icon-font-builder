@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 
 const previewTemplatePath = path.resolve(
   __dirname,
-  "../templates/icons-preview.hbs",
+  "../../templates/icons-preview.hbs",
 );
 
 function generatePreview(glyphs: IconGlyph[] = [], config: ResolvedConfig): void {

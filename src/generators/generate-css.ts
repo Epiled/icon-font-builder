@@ -11,11 +11,11 @@ import { ResolvedConfig } from "#config/types.js";
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const iconsTemplatePath = path.resolve(__dirname, "../templates/icons.css.hbs");
+const iconsTemplatePath = path.resolve(__dirname, "../../templates/icons.css.hbs");
 
 const baseIconTemplatePath = path.resolve(
   __dirname,
-  "../templates/base-icons.hbs",
+  "../../templates/base-icons.hbs",
 );
 
 if (!fs.existsSync(baseIconTemplatePath))

@@ -31,7 +31,10 @@
   "engines": {
     "node": ">=24"
   },
-  "files": ["dist", "bin"],
+  "files": [
+    "dist",
+    "bin"
+  ],
   "dependencies": {
     "handlebars": "^4.7.8",
     "svg2ttf": "^6.0.3",
@@ -42,18 +45,20 @@
   "devDependencies": {
     "@types/svg2ttf": "^5.0.3",
     "@types/ttf2woff": "^2.0.4",
+    "cpy-cli": "^7.0.0",
     "tree-cli": "^0.6.7",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.0"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run copy-templates",
+    "copy-templates": "cpy \"templates/**/*\" dist/templates",
     "test": "vitest",
     "prepublishOnly": "npm run build && npm test",
-    "build:icons": "node scripts/build-default.js",
-    "build:icons:dev": "node scripts/build-dev.ts",
-    "build:icons:dev:log": "node scripts/build-dev-glyphs.js",
+    "build:icons": "tsx scripts/build-default.js",
+    "build:icons:dev": "tsx scripts/build-dev.ts",
+    "build:icons:dev:log": "tsx scripts/build-dev-glyphs.js",
     "tree-cli": "npx tree-cli -l 5 -a --markdown --ignore node_modules/,build/,.git/,.next/,coverage/,out/,tmp/,temp/ ./ -o structure.md"
   },
   "imports": {

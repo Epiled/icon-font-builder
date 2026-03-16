@@ -13,12 +13,12 @@ const __dirname = path.dirname(__filename);
 
 const iconsTemplatePath = path.resolve(
   __dirname,
-  "../templates/icons.scss.hbs",
+  "../../templates/icons.scss.hbs",
 );
 
 const baseIconTemplatePath = path.resolve(
   __dirname,
-  "../templates/base-icons.hbs",
+  "../../templates/base-icons.hbs",
 );
 
 if (!fs.existsSync(baseIconTemplatePath))
