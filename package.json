@@ -40,15 +40,24 @@
     "ttf2woff2": "^8.0.1"
   },
   "devDependencies": {
+    "@types/svg2ttf": "^5.0.3",
+    "@types/ttf2woff": "^2.0.4",
     "tree-cli": "^0.6.7",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
     "vitest": "^4.1.0"
   },
   "scripts": {
     "test": "vitest",
     "prepublishOnly": "npm test",
     "build:icons": "node scripts/build-default.js",
-    "build:icons:dev": "node scripts/build-dev.js",
+    "build:icons:dev": "node scripts/build-dev.ts",
     "build:icons:dev:log": "node scripts/build-dev-glyphs.js",
     "tree-cli": "npx tree-cli -l 5 -a --markdown --ignore node_modules/,build/,.git/,.next/,coverage/,out/,tmp/,temp/ ./ -o structure.md"
+  },
+  "imports": {
+    "#dev/*": "./dev/*",
+    "#src/*": "./src/*",
+    "#config/*": "./src/config/*"
   }
 }

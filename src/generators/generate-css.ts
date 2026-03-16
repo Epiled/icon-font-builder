@@ -5,6 +5,9 @@ import path from "path";
 import url from "url";
 import handlebars from "handlebars";
 
+import { CssResult, IconGlyph } from "../core/types.js";
+import { ResolvedConfig } from "#config/types.js";
+
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -30,7 +33,7 @@ handlebars.registerPartial(
 const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
 const cssTemplate = handlebars.compile(cssRaw);
 
-function generateCss(glyphs = [], config) {
+function generateCss(glyphs: IconGlyph[] = [], config: ResolvedConfig): CssResult {
   const { font, css } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
   const { cssClass, cssFileName } = css;

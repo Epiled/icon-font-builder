@@ -1,7 +1,10 @@
 // Step: Normalize
 
-function normalizeIcons(icons = [], config) {
-  const prefix = config.css.cssClass || "";
+import { UserConfig } from "#config/types.js";
+import { Icon } from "./types.js";
+
+function normalizeIcons(icons: Icon[] = [], config: UserConfig): Icon[] {
+  const prefix = config.stripPrefix ?? "";
 
   return icons.map((icon) => ({
     ...icon,

@@ -5,6 +5,9 @@ import path from "path";
 import url from "url";
 import handlebars from "handlebars";
 
+import { IconGlyph } from "../core/types.js";
+import { ResolvedConfig } from "#config/types.js";
+
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -13,7 +16,7 @@ const previewTemplatePath = path.resolve(
   "../templates/icons-preview.hbs",
 );
 
-function generatePreview(glyphs = [], config) {
+function generatePreview(glyphs: IconGlyph[] = [], config: ResolvedConfig): void {
   const { font, css } = config;
   const { fontName } = font;
   const { cssClass, cssFileName } = css;

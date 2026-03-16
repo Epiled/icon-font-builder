@@ -18,6 +18,8 @@ const defaultConfig = {
     cssClass: "icon",
     cssFileName: fontName.toLowerCase(),
   },
+  stripPrefix: null,
+  codepointsFile: null,
 };
 
 export { defaultConfig };

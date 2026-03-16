@@ -24,7 +24,7 @@
 }
 
 {{#each glyphs}}
-.{{../cssClass}}{{name}}::before {
+.{{../cssClass}}-{{name}}::before {
   @extend %{{../cssClass}};
   content: "\\{{unicodeHex}}";
 }

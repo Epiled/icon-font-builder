@@ -3,7 +3,9 @@
 import fs from "fs";
 import path from "path";
 
-function scanIcons(dir) {
+import { Icon } from "./types.js";
+
+function scanIcons(dir: string): Icon[] {
   if (!fs.existsSync(dir)) {
     throw new Error(`Icons directory not found: ${dir}`);
   }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { buildIcons } from "../src/build-icons.js";
+import { buildIcons } from "../src/build-icons";
 
 try {
   await buildIcons();

@@ -7,7 +7,9 @@ import svg2ttf from "svg2ttf";
 import ttf2woff from "ttf2woff";
 import ttf2woff2 from "ttf2woff2";
 
-async function convertFonts(config) {
+import { ResolvedConfig } from "#config/types.js";
+
+async function convertFonts(config: ResolvedConfig): Promise<void> {
   const { font, outputDir } = config;
   const { fontName } = font;
 

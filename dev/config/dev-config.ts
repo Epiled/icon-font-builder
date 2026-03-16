@@ -1,8 +1,10 @@
 // Default configuration
 
+import { UserConfig } from "#src/config/types.ts";
+
 const fontName = "Epiled";
 
-const devConfig = {
+const devConfig: UserConfig = {
   iconsName: fontName,
   inputDir: "dev/assets/svg/icons-ui",
   outputDir: `dist/assets/fonts/${fontName}`,
@@ -18,6 +20,8 @@ const devConfig = {
     cssClass: "icon",
     cssFileName: fontName.toLowerCase(),
   },
+  stripPrefix: null,
+  codepointsFile: "dist/codepoints.json"
 };
 
 export { devConfig };

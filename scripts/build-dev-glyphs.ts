@@ -1,6 +1,6 @@
-import { devConfig } from "../dev/config/dev-config.js";
+import { devConfig } from "#dev/config/dev-config.js";
 
-import { buildIcons } from "../src/build-icons.js";
+import { buildIcons } from "#src/build-icons.js";
 
 async function run() {
   const glyphs = await buildIcons(devConfig);
