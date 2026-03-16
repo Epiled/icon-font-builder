@@ -278,17 +278,21 @@ dist/
 
 ## Options
 
-| Option            | Type   | Default    | Description                 |
-| ----------------- | ------ | ---------- | --------------------------- |
-| iconsName         | string | Icons      | Name of the icon set        |
-| inputDir          | string | src/icons  | Source folder for SVG icons |
-| outputDir         | string | dist/fonts | Output directory            |
-| font.fontName     | string | Icons      | Font name                   |
-| font.folderName   | string | Icons      | Folder name for font files  |
-| font.fontFileName | string | Icons      | Font file base name         |
-| font.fontPath     | string | ../fonts   | Path to font in CSS         |
-| css.cssClass      | string | icon       | CSS class prefix            |
-| css.cssFileName   | string | icons      | Name of generated CSS file  |
+| Option            | Type                 | Default    | Description                                   |
+| ----------------- | -------------------- | ---------- | --------------------------------------------- |
+| iconsName         | string               | Icons      | Name of the icon set                          |
+| inputDir          | string               | src/icons  | Source folder for SVG icons                   |
+| outputDir         | string               | dist/fonts | Output directory                              |
+| font.fontName     | string               | Icons      | Font name                                     |
+| font.folderName   | string               | Icons      | Folder name for font files                    |
+| font.fontFileName | string               | Icons      | Font file base name                           |
+| font.fontPath     | string               | ../fonts   | Path to font in generated styles              |
+| css.cssClass      | string               | icon       | CSS class prefix                              |
+| css.cssFileName   | string               | icons      | Name of generated CSS/SASS file               |
+| formats           | ("css" \| "sass")[]  | ["css"]    | Output style formats to generate              |
+| stripPrefix       | string \| null       | null       | Remove a prefix from icon names               |
+| codepointsFile    | string               | —          | File path to store persistent icon codepoints |
+
 
 ## Requirements
 

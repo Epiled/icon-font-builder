@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "rootDir": "src",
-    "outDir": "dist",
+    "rootDir": "./",
+    "outDir": "./dist",
 
     "declaration": true,
     "declarationMap": true,
@@ -23,6 +23,6 @@
       "#src/*": ["src/*"]
     }
   },
-  "include": ["src", "test"],
+  "include": ["src", "bin"],
   "exclude": ["node_modules", "dist", "tests"]
 }

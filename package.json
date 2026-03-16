@@ -2,8 +2,12 @@
   "name": "@epiled/icon-font-builder",
   "version": "1.1.1",
   "description": "Generate icon fonts from SVG files",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
-  "main": "index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "bin": {
     "icon-font-builder": "./bin/cli.js"
   },
@@ -27,11 +31,7 @@
   "engines": {
     "node": ">=24"
   },
-  "files": [
-    "bin",
-    "src",
-    "index.js"
-  ],
+  "files": ["dist", "bin"],
   "dependencies": {
     "handlebars": "^4.7.8",
     "svg2ttf": "^6.0.3",
@@ -48,8 +48,9 @@
     "vitest": "^4.1.0"
   },
   "scripts": {
+    "build": "tsc",
     "test": "vitest",
-    "prepublishOnly": "npm test",
+    "prepublishOnly": "npm run build && npm test",
     "build:icons": "node scripts/build-default.js",
     "build:icons:dev": "node scripts/build-dev.ts",
     "build:icons:dev:log": "node scripts/build-dev-glyphs.js",
