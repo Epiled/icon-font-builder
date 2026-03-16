@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
 
 import fs from "fs";
 import path from "path";
@@ -13,6 +13,16 @@ import { ResolvedConfig } from "#src/config/types.ts";
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const DIST = path.join(process.cwd(), "dist/css");
+
+beforeEach(() => {
+  fs.rmSync(DIST, { recursive: true, force: true });
+});
+
+afterEach(() => {
+  fs.rmSync(DIST, { recursive: true, force: true });
+});
 
 describe("generate-css", () => {
   const iconsDir = path.join(__dirname, "fixtures/icons");
