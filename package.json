@@ -1,6 +1,6 @@
 {
   "name": "@epiled/icon-font-builder",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Generate icon fonts from SVG files",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
