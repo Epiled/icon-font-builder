@@ -17,9 +17,10 @@ const previewTemplatePath = path.resolve(
 );
 
 function generatePreview(glyphs: IconGlyph[] = [], config: ResolvedConfig): void {
-  const { font, css } = config;
+  const { font, css, templates } = config;
   const { fontName } = font;
   const { cssClass, cssFileName } = css;
+  const { preview } = templates;
 
   if (!fs.existsSync(previewTemplatePath)) {
     throw new Error(`Template preview not found: ${previewTemplatePath}`);
@@ -41,7 +42,7 @@ function generatePreview(glyphs: IconGlyph[] = [], config: ResolvedConfig): void
     glyphs,
   });
 
-  const outputPath = path.join("dist", `icons-preview.html`);
+  const outputPath = path.join(`${preview.outputDir}`, `icons-preview.html`);
 
   fs.writeFileSync(outputPath, previewParse);
 }

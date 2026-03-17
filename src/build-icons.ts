@@ -30,8 +30,13 @@ export async function buildIcons(userConfig: UserConfig = {}): Promise<IconGlyph
   await buildSvgFont(glyphs, config);
   await convertFonts(config);
 
-  await generateStyles(glyphs, config);
-  await generatePreview(glyphs, config);
+  if(config.templates.styles?.generation) {
+    await generateStyles(glyphs, config);
+  }
+
+  if(config.templates.preview?.generation) {
+    await generatePreview(glyphs, config);
+  }
 
   console.log("End Generation Font Icon");
 

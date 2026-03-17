@@ -34,9 +34,10 @@ const cssRaw = fs.readFileSync(iconsTemplatePath, "utf8");
 const cssTemplate = handlebars.compile(cssRaw);
 
 function generateCss(glyphs: IconGlyph[] = [], config: ResolvedConfig): CssResult {
-  const { font, css } = config;
+  const { font, css, templates } = config;
   const { fontName, folderName, fontFileName, fontPath } = font;
   const { cssClass, cssFileName } = css;
+  const { styles } = templates;
 
   if (!Array.isArray(glyphs)) {
     throw new Error(
@@ -44,7 +45,7 @@ function generateCss(glyphs: IconGlyph[] = [], config: ResolvedConfig): CssResul
     );
   }
 
-  const outputPath = path.join("dist/css", `${cssFileName}.css`);
+  const outputPath = path.join(`${styles.outputDir}/css`, `${cssFileName}.css`);
 
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 

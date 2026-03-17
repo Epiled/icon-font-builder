@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { buildIcons } from "#src/build-icons.ts";
 
 import fs from "fs";

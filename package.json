@@ -35,6 +35,21 @@
     "dist",
     "bin"
   ],
+  "scripts": {
+    "build": "tsc && npm run copy-templates",
+    "copy-templates": "cpy \"templates/**/*\" dist/templates",
+    "test": "vitest",
+    "prepublishOnly": "npm run test && npm run build",
+    "build:icons": "tsx scripts/build-default.js",
+    "build:icons:dev": "tsx scripts/build-dev.ts",
+    "build:icons:dev:log": "tsx scripts/build-dev-glyphs.js",
+    "tree-cli": "npx tree-cli -l 5 -a --markdown --ignore node_modules/,build/,.git/,.next/,coverage/,out/,tmp/,temp/ ./ -o structure.md"
+  },
+  "imports": {
+    "#dev/*": "./dev/*",
+    "#src/*": "./src/*",
+    "#config/*": "./src/config/*"
+  },
   "dependencies": {
     "handlebars": "^4.7.8",
     "svg2ttf": "^6.0.3",
@@ -50,20 +65,5 @@
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "vitest": "^4.1.0"
-  },
-  "scripts": {
-    "build": "tsc && npm run copy-templates",
-    "copy-templates": "cpy \"templates/**/*\" dist/templates",
-    "test": "vitest",
-    "prepublishOnly": "npm run test && npm run build",
-    "build:icons": "tsx scripts/build-default.js",
-    "build:icons:dev": "tsx scripts/build-dev.ts",
-    "build:icons:dev:log": "tsx scripts/build-dev-glyphs.js",
-    "tree-cli": "npx tree-cli -l 5 -a --markdown --ignore node_modules/,build/,.git/,.next/,coverage/,out/,tmp/,temp/ ./ -o structure.md"
-  },
-  "imports": {
-    "#dev/*": "./dev/*",
-    "#src/*": "./src/*",
-    "#config/*": "./src/config/*"
   }
 }

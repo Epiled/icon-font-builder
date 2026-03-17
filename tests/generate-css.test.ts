@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 
 import fs from "fs";
 import path from "path";
@@ -14,16 +14,6 @@ import { ResolvedConfig } from "#src/config/types.ts";
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DIST = path.join(process.cwd(), "dist/css");
-
-beforeEach(() => {
-  fs.rmSync(DIST, { recursive: true, force: true });
-});
-
-afterEach(() => {
-  fs.rmSync(DIST, { recursive: true, force: true });
-});
-
 describe("generate-css", () => {
   const iconsDir = path.join(__dirname, "fixtures/icons");
   const glyph = {
@@ -37,7 +27,14 @@ describe("generate-css", () => {
   it("should generate css file", () => {
     const glyphs: IconGlyph[] = [glyph];
 
-    const config = createConfig({ iconsName: "Test-Icons" });
+    const config = createConfig({ 
+      iconsName: "Test-Icons", 
+      templates: {
+        styles: {
+          outputDir: ".temp",
+        } 
+      },
+    });
 
     const result = generateCss(glyphs, config);
 
@@ -46,7 +43,7 @@ describe("generate-css", () => {
   });
 
   it("should throw error when has not valid glyphs array", () => {
-    const config = { font: {}, css: {} };
+    const config = { font: {}, css: {}, templates: {} };
 
     expect(() => generateCss("wrong" as unknown as IconGlyph[], config as unknown as ResolvedConfig)).toThrow(
       /⚠️ generateCss called without valid glyphs array. This task should never run in isolation — it must be triggered by iconsBuild./,
@@ -59,6 +56,11 @@ describe("generate-css", () => {
     const config = createConfig({
       iconsName: "Test-Icons",
       inputPath: iconsDir,
+      templates: {
+        styles: {
+          outputDir: ".temp",
+        } 
+      },
     });
 
     const result = generateCss(glyphs, config);
