@@ -1,11 +1,11 @@
 import fs from "fs";
 import path from "path";
 
-export function loadCodepointMap() {
+export function loadCodepointMap(codepointsFile?: string) {
   
   const iconCache = path.resolve(
     process.cwd(),
-    ".icon-builder-cache.json"
+    `${codepointsFile}.json`
   );
 
   let cache = {}

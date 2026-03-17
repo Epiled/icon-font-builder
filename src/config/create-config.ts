@@ -1,4 +1,4 @@
-import { CssConfig, FontConfig, ResolvedConfig, UserConfig } from "./types.js";
+import { CssConfig, FontConfig, ResolvedConfig, TemplateConfig, UserConfig } from "./types.js";
 
 /**
  * Creates a custom configuration for the icon builder.
@@ -28,6 +28,17 @@ export function createConfig<T = Record<string, unknown>>(userConfig: UserConfig
     cssFileName: iconsName.toLowerCase(),
   };
 
+  const defaultTemplates: Required<TemplateConfig> = {
+    styles: {
+      generation: true,
+      outputDir: "dist",
+    },
+    preview: {
+      generation: true,
+      outputDir: "dist",
+    },
+  }
+
   const config: ResolvedConfig<T> = {
     ...userConfig,
 
@@ -41,13 +52,26 @@ export function createConfig<T = Record<string, unknown>>(userConfig: UserConfig
       ...defaultFont,
       ...(userConfig.font),
     },
+
     css: {
       ...defaultCss,
       ...(userConfig.css),
     },
+    
+    templates: {
+      styles: {
+        ...defaultTemplates.styles,
+        ...userConfig.templates?.styles,
+      },
+      preview: {
+        ...defaultTemplates.preview,
+        ...userConfig.templates?.preview,
+      },
+    },
+
     formats: ["css"],
     stripPrefix: userConfig.stripPrefix ?? null,
-    codepointsFile: userConfig.codepointsFile,
+    codepointsFile: userConfig.codepointsFile ?? ".icon-builder-cache",
   };
 
   return config;

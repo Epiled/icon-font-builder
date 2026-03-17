@@ -237,8 +237,18 @@ gulp.task("buildIcons", async function () {
       cssClass: "icon-all",
       cssFileName: "icons-css-file-name",
     },
+    templates: {
+      styles: {
+        generation: true,
+        outputDir: "dist",
+      },
+      preview: {
+        generation: true,
+        outputDir: "dist",
+      },
+    }
     stripPrefix: "icon-", // removes "icon-" prefix from icon filenames
-    codepointsFile: ".icon-builder-cache", // experimental: custom path not supported yet: file used to store icon → codepoint mapping
+    codepointsFile: ".icon-builder-cache",
   });
 });
 ```
@@ -303,20 +313,24 @@ dist/
 
 ## Options
 
-| Option            | Type                 | Default    | Description                                   |
-| ----------------- | -------------------- | ---------- | --------------------------------------------- |
-| iconsName         | string               | Icons      | Name of the icon set                          |
-| inputDir          | string               | src/icons  | Source folder for SVG icons                   |
-| outputDir         | string               | dist/fonts | Output directory                              |
-| font.fontName     | string               | Icons      | Font name                                     |
-| font.folderName   | string               | Icons      | Folder name for font files                    |
-| font.fontFileName | string               | Icons      | Font file base name                           |
-| font.fontPath     | string               | ../fonts   | Path to font in generated styles              |
-| css.cssClass      | string               | icon       | CSS class prefix                              |
-| css.cssFileName   | string               | icons      | Name of generated CSS/SASS file               |
-| formats           | ("css" \| "sass")[]  | ["css"]    | Output style formats to generate              |
-| stripPrefix       | string \| null       | null       | Remove a prefix from icon names               |
-| codepointsFile    | string               | —          | File path to store persistent icon codepoints → codepoint mapping (auto-managed) |
+| Option                          | Type                | Default             | Description                                                  |
+| ------------------------------- | ------------------- | ------------------- | ------------------------------------------------------------ |
+| iconsName                       | string              | Icons               | Name of the icon set                                         |
+| inputDir                        | string              | src/icons           | Source folder for SVG icons                                  |
+| outputDir                       | string              | dist/fonts          | Output directory                                             |
+| font.fontName                   | string              | Icons               | Font name                                                    |
+| font.folderName                 | string              | Icons               | Folder name for font files                                   |
+| font.fontFileName               | string              | Icons               | Font file base name                                          |
+| font.fontPath                   | string              | ../fonts            | Path to font in generated styles                             |
+| css.cssClass                    | string              | icon                | CSS class prefix                                             |
+| css.cssFileName                 | string              | icons               | Name of generated CSS/SASS file (without extension)          |
+| templates.styles.generation     | boolean             | true                | Enable or disable generation of style files (CSS/SASS)       |
+| templates.styles.outputDir      | string              | dist                | Directory where generated style files will be written        |
+| templates.preview.generation    | boolean             | true                | Enable or disable generation of the preview file (HTML demo) |
+| templates.preview.outputDir     | string              | dist                | Directory where the preview file will be written             |
+| formats                         | ("css" \| "sass")[] | ["css"]             | Style formats to generate when styles template is enabled    |
+| stripPrefix                     | string \| null      | null                | Remove a prefix from icon names                              |
+| codepointsFile                  | string              | .icon-builder-cache | File path to store persistent icon codepoints                |
 
 
 ## Requirements

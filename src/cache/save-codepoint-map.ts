@@ -3,9 +3,9 @@ import path from "path";
 
 import { IconGlyph } from "../core/types.js";
 
-export function saveCodepointMap(glyphs: IconGlyph[]) {
+export function saveCodepointMap(glyphs: IconGlyph[], codepointsFile?: string) {
 
-  const outputPath = path.resolve(process.cwd(), ".icon-builder-cache.json");
+  const outputPath = path.resolve(process.cwd(), `${codepointsFile}.json`);
 
   // fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 

@@ -10,6 +10,17 @@ export interface CssConfig {
   cssFileName?: string;
 }
 
+export interface TemplateConfig {
+  styles?: {
+    generation?: boolean,
+    outputDir?: string,
+  },
+  preview?: {
+    generation?: boolean,
+    outputDir?: string,
+  },
+}
+
 export type Styles = "css" | "sass";
 
 export type UserConfig<T = Record<string, unknown>> = {
@@ -19,8 +30,9 @@ export type UserConfig<T = Record<string, unknown>> = {
   font?: FontConfig,
   css?: CssConfig,
   formats?: Styles[];
+  templates?: TemplateConfig;
   stripPrefix?: string | null,
-  codepointsFile?: string;
+  codepointsFile?: string | null;
 } & T
 
 export type ResolvedConfig<T = Record<string, unknown>> = {
@@ -30,4 +42,6 @@ export type ResolvedConfig<T = Record<string, unknown>> = {
   font: Required<FontConfig>
   css: Required<CssConfig>
   formats: Styles[];
+  templates: Required<TemplateConfig>;
+  codepointsFile: string;
 } & T

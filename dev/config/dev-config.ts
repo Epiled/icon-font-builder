@@ -1,4 +1,4 @@
-// Default configuration
+// Devolvement configuration
 
 import { UserConfig } from "#src/config/types.ts";
 
@@ -7,7 +7,7 @@ const fontName = "Epiled";
 const devConfig: UserConfig = {
   iconsName: fontName,
   inputDir: "dev/assets/svg/icons-ui",
-  outputDir: `dist/assets/fonts/${fontName}`,
+  outputDir: `.temp/assets/fonts/${fontName}`,
 
   font: {
     fontName: fontName,
@@ -20,8 +20,21 @@ const devConfig: UserConfig = {
     cssClass: "icon",
     cssFileName: fontName.toLowerCase(),
   },
+
+  templates: {
+    styles: {
+      generation: true,
+      outputDir: ".temp",
+    },
+    preview: {
+      generation: true,
+      outputDir: ".temp",
+    },
+  },
+
+  formats: ["css"],
   stripPrefix: null,
-  codepointsFile: "dist/codepoints.json"
+  codepointsFile: ".icon-builder-cache"
 };
 
 export { devConfig };

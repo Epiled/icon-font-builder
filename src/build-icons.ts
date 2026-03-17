@@ -21,17 +21,22 @@ export async function buildIcons(userConfig: UserConfig = {}): Promise<IconGlyph
   const scanned = scanIcons(config.inputDir);
   const normalized = normalizeIcons(scanned, config);
 
-  const cache = loadCodepointMap();
+  const cache = loadCodepointMap(config.codepointsFile);
   const icons = assignCodepoints(normalized, cache);
 
   const glyphs = saveUnicodeMap(icons);
 
-  await saveCodepointMap(glyphs);
+  await saveCodepointMap(glyphs, config.codepointsFile);
   await buildSvgFont(glyphs, config);
   await convertFonts(config);
 
-  await generateStyles(glyphs, config);
-  await generatePreview(glyphs, config);
+  if(config.templates.styles?.generation) {
+    await generateStyles(glyphs, config);
+  }
+
+  if(config.templates.preview?.generation) {
+    await generatePreview(glyphs, config);
+  }
 
   console.log("End Generation Font Icon");
 
