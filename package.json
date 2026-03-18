@@ -18,15 +18,19 @@
     "font",
     "webfont"
   ],
-  "author": "Felipe De Andrade (https://github.com/epiled)",
+  "author": "Felipe De Andrade (https://github.com/Epiled)",
   "license": "MIT",
-  "homepage": "https://github.com/epiled/icon-font-builder",
+  "homepage": "https://github.com/Epiled/icon-font-builder",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/epiled/icon-font-builder.git"
+    "url": "git+https://github.com/Epiled/icon-font-builder.git"
   },
   "bugs": {
-    "url": "https://github.com/epiled/icon-font-builder/issues"
+    "url": "https://github.com/Epiled/icon-font-builder/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   },
   "engines": {
     "node": ">=22"
