@@ -21,6 +21,7 @@ Generate icon fonts from SVG files and automatically create CSS classes.
 - [CLI](#cli)
 - [Node API](#node-api)
 - [Usage](#usage)
+  - [Example project structure](#example-project-structure)
 - [Examples](#examples)
   - [Gulp](#gulp)
     - [Minimal configuration](#minimal-configuration)
@@ -74,6 +75,15 @@ Then use the icons with CSS classes:
 <i class="icon-arrow"></i>
 ```
 
+#### Example Project Structure:
+
+```text
+src/
+├── icons/
+|  ├── add-user.svg
+|  └── arrow.svg
+```
+
 ## Examples
 
 ### Gulp
@@ -89,15 +99,6 @@ import { buildIcons } from "@epiled/icon-font-builder";
 gulp.task("buildIcons", async function () {
   await buildIcons();
 });
-```
-
-##### Example Project Structure:
-
-```text
-src/
-├── icons/
-|  ├── add-user.svg
-|  └── arrow.svg
 ```
 
 ##### Output Tree:
@@ -253,10 +254,6 @@ gulp.task("buildIcons", async function () {
 });
 ```
 
-> ⚠️ **Note**
-> `codepointsFile` is currently auto-managed by the builder.  
-> Custom paths are not supported yet and will be ignored.
-
 ##### Output Tree:
 
 ```text
@@ -335,8 +332,7 @@ dist/
 
 ## Requirements
 
-- Node.js >= 24.14.0
-- npm >= 11.9.0
+- Node.js >= 22
 
 ## Author
 
